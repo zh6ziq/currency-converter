@@ -13,7 +13,7 @@
 
 html body {
     height: auto;
-    background: whitesmoke;
+    background: linear-gradient(to right, rgb(40, 61, 247), rgb(0, 120, 175));
 
 }
 

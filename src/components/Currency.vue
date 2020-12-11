@@ -2,7 +2,7 @@
 <div class="container px-0">
 
     <div class="myheader p-0">
-        <h1>Real Time Currency Converter</h1>
+        <h1>Currency Converter</h1>
     </div>
 
     <div class="row p-3">
@@ -74,7 +74,7 @@ export default {
             return Object.values(this.currencies)
         },
         calculateResults() {
-            return (Number(this.value) * this.result).toFixed(3)
+            return (Number(this.value) * this.result).toFixed(2)
         },
 
     },
@@ -94,6 +94,10 @@ export default {
                     this.currencies = response.data.results;
                     localStorage.setItem('currencies', JSON.stringify(response.data.results))
                 })
+                .catch(err => {
+                    console.log(err)
+                    alert('System error occured')
+                })
         },
 
         //convert currency using API
@@ -101,8 +105,12 @@ export default {
             const search = `${this.from}_${this.to}`
             axios.get(`https://free.currconv.com/api/v7/convert?q=${search}&apiKey=7c3852999c6529f16732`)
                 .then((response) => {
-                    console.log(response)
+                    // console.log(response)
                     this.result = response.data.results[search].val;
+                })
+                .catch(err => {
+                    console.log(err)
+                    alert('System error occured')
                 })
         },
 
